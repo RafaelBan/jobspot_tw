@@ -1,0 +1,19 @@
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  background: white;
+}
+
+ul {
+  li {
+    list-style: none;
+  }
+}
+button {
+  outline: none;
+  border: 0;
+  background: transparent;
+}
+.user {
+  font-size: 14px;
+}

@@ -1,0 +1,98 @@
+<div *ngIf="info.token; else loggedOut">
+  <div class="container-fluid page">
+    <div class="d-flex aquire page__box p-4 mt-2">Home</div>
+    <div class="page__content shadow p-4 position-relative">
+      <div class="main-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <p class=" secundary welcome mt-5">Welcome back,</p>
+              <p class=" aquire prenume mt-2">Rafael-Valentin</p>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-icon">
+                  <p class="card-category primary aquire"><span id="jobOpenings">{{this.jobCount}}</span></p>
+                  <h3 class="card-body secundary">
+                    job openings right now.
+                  </h3>
+                  <div class="card-icon">
+                    <i class="material-icons secundary">work</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-icon">
+                  <p class="card-category primary aquire"><span id="peopleSearching">{{this.userCount}}</span></p>
+                  <h3 class="card-body secundary">
+                    people searching for a job.
+                  </h3>
+                  <div class="card-icon">
+                    <i class="material-icons secundary">person</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-icon">
+                  <p class="card-category primary aquire"><span id="recruiterSearching">{{this.recruiterCount}}</span></p>
+                  <h3 class="card-body secundary">
+                    recruiters searching for new colleagues.
+                  </h3>
+                  <div class="card-icon">
+                    <i class="material-icons secundary">person_search</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <div class="card">
+              <div class="card-header">
+                  <p class="card-category table-title mt-2"> Your active applications</p>
+              </div>
+              <table mat-table
+                  [dataSource]="dataSource" multiTemplateDataRows
+                  class="mat-elevation-z8">
+              <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                  <div class="element-detail"
+                      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <div class="element-description">
+                      <div class="element-description-titles">Applicant name:</div>{{element.applicant_name}}<br>
+                      <div class="element-description-titles">Location:</div>{{element.location}}<br>
+                      <div class="element-description-titles">Job description:</div><div class="element-job-description">{{element.description}}</div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+              <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+                  class="element-row"
+                  [class.expanded-row]="expandedElement === element"
+                  (click)="expandedElement = expandedElement === element ? null : element">
+              </tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <meta http-equiv="refresh" content="0; URL=http://localhost:4200/auth/login" />
+</ng-template>

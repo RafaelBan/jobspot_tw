@@ -1,0 +1,118 @@
+.page {
+  padding: 1rem;
+  background: white;
+  &__box {
+    min-height: 120px;
+    background: white;
+    margin: 0 -1rem;
+    font-size: 36px;
+  }
+  &__content {
+    min-height: calc(100vh - 178px);
+    border-radius: 10px;
+    margin-top: -3rem;
+    background: white;
+    color: black;
+    font-size: 2rem;
+    &-data {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.aquire {
+  font-family: 'aquire', 'arial', sans-serif;
+}
+
+.primary {
+  color: #f0ba27;
+}
+
+.secundary {
+  color: rgb(194, 194, 194);
+}
+
+.welcome {
+  font-size: 20px;
+}
+
+.prenume {
+  font-size: 30px;
+  color: #f0ba27;
+}
+
+.table-title {
+  font-size:15px;
+}
+
+.card-stats{
+  .card-header{
+
+    .card-category{
+      padding-top: 20px;
+      padding-right: 5px;
+      font-size: 70px;
+      text-align: right;
+    }
+
+    .card-category {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    &.card-header-icon i {
+      font-size: 100px;
+      line-height: 0px;
+      width: 56px;
+      height: 56px;
+      text-align: center;
+    }
+  }
+
+  .card-body {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 12px;
+    text-align: right;
+}
+}
+
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.element-description {
+  padding: 16px;
+  padding-left: 100px;
+}
+
+.element-description-titles {
+  opacity: 0.5;
+}
+
+.element-job-description {
+  white-space: pre-wrap;
+}

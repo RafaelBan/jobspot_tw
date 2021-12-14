@@ -1,0 +1,13 @@
+<div *ngIf="info.token; else loggedOut">
+  <div class="container-fluid page">
+    <div class="d-flex aquire page__box p-4 mt-2">Jobs</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div class="page__content-data position-absolute text-center">
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <meta http-equiv="refresh" content="0; URL=http://localhost:4200/auth/login" />
+</ng-template>

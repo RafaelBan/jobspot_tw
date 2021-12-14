@@ -1,0 +1,39 @@
+:host {
+  .mat-icon {
+    vertical-align: middle;
+    margin-right: 1rem;
+  }
+}
+.aquire {
+  font-family: 'aquire', 'arial', sans-serif;
+}
+.logo {
+  text-align: center;
+  padding: 1.37rem 1rem;
+  font-size: 3rem;
+}
+.mat-list-item {
+  font-size: 0.8rem;
+  height: 44px !important;
+  margin-bottom: 4px;
+  &:hover {
+    color: #f2f5f7 !important;
+  }
+  ::ng-deep {
+    .mat-list-item-content {
+      border-radius: 5px;
+      margin: 0 8px;
+      &:hover {
+        background: #836514 !important;
+      }
+    }
+  }
+}
+.list-item-active {
+  color: #f2f5f7 !important;
+  ::ng-deep {
+    .mat-list-item-content {
+      background: #836514 !important;
+    }
+  }
+}
