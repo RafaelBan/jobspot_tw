@@ -1,2 +1,1 @@
-# jobspot_tw
-Proiect 'JOBSpot' pentru Tehnologii Web.
+# Proiect JOBSpot
