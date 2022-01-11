@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 
 import org.hibernate.annotations.NaturalId;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,12 +31,6 @@ public class User{
     @Column(name = "username")
     private String username;
 
-    @NotBlank
-    @Size(min=3, max = 50)
-    @Column(name = "type")
-    private String type;
-
-    @NaturalId
     @NotBlank
     @Size(max = 50)
     @Email
@@ -53,13 +50,18 @@ public class User{
     @Column(name = "last_name")
     private String lastName;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(  name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-    public User(String username, String email, String password, String firstName, String lastName, String type) {
+
+    public User(String username, String email, String password, String firstName, String lastName) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.type = type;
     }
 }

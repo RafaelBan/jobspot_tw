@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 @Getter
 @Setter
@@ -21,16 +24,32 @@ public class Application {
     private Long id;
 
     @NotBlank
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private int userId;
 
     @NotBlank
-    @Column(name = "jobId")
+    @Column(name = "job_id")
     private int jobId;
 
     @NotBlank
-    @Size(min=4, max = 50)
     @Column(name = "status")
     private String status;
+
+    @NotBlank
+    @Column(name = "cv_path")
+    private String cv_path;
+
+    @NotBlank
+    @Column(name = "date")
+    private String date;
+
+    public Application(int userId, int jobId) {
+        this.userId = userId;
+        this.jobId = jobId;
+        this.status = "Open";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        this.date = formatter.format(date);
+    }
 
 }

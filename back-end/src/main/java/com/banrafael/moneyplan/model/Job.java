@@ -21,7 +21,7 @@ public class Job {
     private Long id;
 
     @NotBlank
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private int userId;
 
     @NotBlank
@@ -38,4 +38,14 @@ public class Job {
     @Size(min=0, max = 150)
     @Column(name = "tags")
     private String tags;
+
+    @NotBlank
+    @Size(min=0, max = 150)
+    @Column(name = "location")
+    private String location;
+
+    @NotBlank
+    @Size(min=4, max = 50)
+    @Column(name = "status")
+    private String status;
 }
