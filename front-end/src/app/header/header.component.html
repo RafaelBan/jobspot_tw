@@ -3,28 +3,34 @@
     <button mat-icon-button (click)="toggleSidebar()">
       <mat-icon>menu</mat-icon>
     </button>
-    <div class="row mr-2 ml-auto">
-      <ul class="row m-0 align-items-center">
-        <li>
-          <button
-            mat-button
-            [matMenuTriggerFor]="menu"
-            class="user mt-2 d-flex align-items-center"
-          >
-
-            Rafael-Valentin
-            <mat-icon class="user-image-icon ml-1"
-              >keyboard_arrow_down</mat-icon
+    <div *ngIf="token.getToken()">
+      <div class="row mr-2 ml-auto">
+        <ul class="row m-0 align-items-center">
+          <li>
+            <button
+              mat-button
+              [matMenuTriggerFor]="menu"
+              class="user mt-2 d-flex align-items-center"
             >
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>exit_to_app</mat-icon>
-              Logout
+
+            {{this.token.getFirstName()}}
+              <mat-icon class="user-image-icon ml-1"
+                >keyboard_arrow_down</mat-icon
+              >
             </button>
-          </mat-menu>
-        </li>
-      </ul>
+            <mat-menu #menu="matMenu">
+              <button (click)="goToProfile()" mat-menu-item>
+                <mat-icon>person</mat-icon>
+                Profile
+              </button>
+              <button (click)="logout()" mat-menu-item>
+                <mat-icon>exit_to_app</mat-icon>
+                Logout
+              </button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -26,23 +26,6 @@
   font-family: 'aquire', 'arial', sans-serif;
 }
 
-.primary {
-  color: #f0ba27;
-}
-
-.secundary {
-  color: rgb(194, 194, 194);
-}
-
-.welcome {
-  font-size: 20px;
-}
-
-.prenume {
-  font-size: 30px;
-  color: #f0ba27;
-}
-
 .table-title {
   font-size:15px;
 }
@@ -117,7 +100,12 @@ tr.element-row:not(.expanded-row):active {
   white-space: pre-wrap;
 }
 
-.mat-delete {
-  background-color: rgb(184, 42, 42);
+.mat-edit {
+  background-color: rgb(33, 120, 190);
+  color: #fff;
+}
+
+.mat-apply {
+  background-color: rgb(2, 173, 2);
   color: #fff;
 }

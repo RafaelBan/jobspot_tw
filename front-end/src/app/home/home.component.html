@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
               <p class=" secundary welcome mt-5">Welcome back,</p>
-              <p class=" aquire prenume mt-2">Rafael-Valentin</p>
+              <p class=" aquire prenume mt-2">{{this.info.first_name}}</p>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
@@ -58,7 +58,7 @@
                   <p class="card-category table-title mt-2"> Your active applications</p>
               </div>
               <table mat-table
-                  [dataSource]="dataSource" multiTemplateDataRows
+                  [dataSource]="this.applications_data" multiTemplateDataRows
                   class="mat-elevation-z8">
               <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
                 <th mat-header-cell *matHeaderCellDef> {{column}} </th>
@@ -70,9 +70,10 @@
                   <div class="element-detail"
                       [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                     <div class="element-description">
-                      <div class="element-description-titles">Applicant name:</div>{{element.applicant_name}}<br>
-                      <div class="element-description-titles">Location:</div>{{element.location}}<br>
-                      <div class="element-description-titles">Job description:</div><div class="element-job-description">{{element.description}}</div>
+                      <div class="element-description-titles">Applicant name:</div>{{element.applicant}}<br><br>
+                      <div class="element-description-titles">Location:</div>{{element.location}}<br><br>
+                      <div class="element-description-titles">Job description:</div><div class="element-job-description">{{element.description}}</div><br>
+                      <div class="element-description-titles">Actions:</div><button mat-raised-button color="delete" (click)="delete(element.id)">Delete</button>
                     </div>
                   </div>
                 </td>

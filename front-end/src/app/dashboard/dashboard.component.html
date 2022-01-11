@@ -1,0 +1,57 @@
+<div *ngIf="info.token; else loggedOut">
+  <div *ngIf="info.role == '2'; else noAccess">
+    <div class="container-fluid page">
+      <div class="d-flex aquire page__box p-4 mt-2">Recruiter Dashboard</div>
+      <div class="page__content shadow p-4 position-relative">
+        <a mat-raised-button color="apply" href="http://localhost:4200/dashboard/create" target="_self">Create Job</a>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <p class="card-category table-title mt-2">Your Job Openings</p>
+                </div>
+                <table mat-table
+                    [dataSource]="this.applications_data" multiTemplateDataRows
+                    class="mat-elevation-z8">
+                <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+                  <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="expandedDetail">
+                  <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                    <div class="element-detail"
+                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                      <div class="element-description">
+                        <div class="element-description-titles">Location:</div>{{element.location}}<br><br>
+                        <div class="element-description-titles">Job description:</div><div class="element-job-description">{{element.description}}</div><br>
+                        <div class="element-description-titles">Actions:</div>
+                        <a mat-raised-button color="edit" href="http://localhost:4200/dashboard/job/{{element.id}}" target="_self">Dashboard</a>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+  
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+                    class="element-row"
+                    [class.expanded-row]="expandedElement === element"
+                    (click)="expandedElement = expandedElement === element ? null : element">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <meta http-equiv="refresh" content="0; URL=http://localhost:4200/auth/login" />
+</ng-template>
+
+<ng-template #noAccess>
+  <meta http-equiv="refresh" content="0; URL=http://localhost:4200/home" />
+</ng-template>

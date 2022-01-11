@@ -1,0 +1,59 @@
+<div *ngIf="info.token; else loggedOut">
+    <div class="container-fluid page">
+      <div class="d-flex aquire page__box p-4 mt-2">Account</div>
+      <div class="page__content shadow p-4 position-relative">
+        <mat-expansion-panel [expanded]='true' hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="aquire">
+                Account Details
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form name="form" (ngSubmit)="f.form.valid && onUpdate()" #f="ngForm" novalidate>
+                <div class="form-group mt-2 arial">
+                  <label for="username">Username</label>
+                  <input type="text" class="form-control arial" name="username" [(ngModel)]="this.user.username" #username="ngModel"
+                    required />
+                  <div *ngIf="f.submitted && username.invalid">
+                    <div *ngIf="username.errors!.required">Username is required!</div>
+                  </div>
+                </div>
+                <div class="form-group mt-2 arial">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control arial" name="email" [(ngModel)]="this.user.email" #email="ngModel"
+                    required email/>
+                  <div *ngIf="f.submitted && email.invalid">
+                    <div *ngIf="email.errors!.required">Email is required!</div>
+                    <div *ngIf="email.errors!.email">Email must be a valid email address!</div>
+                  </div>
+                </div>
+                <div class="form-group mt-2 arial">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control arial" name="firstName" [(ngModel)]="this.user.firstName" #firstName="ngModel"
+                    required />
+                  <div *ngIf="f.submitted && firstName.invalid">
+                    <div *ngIf="firstName.errors!.required">First Name is required!</div>
+                  </div>
+                </div>
+                <div class="form-group mt-2 arial">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control arial" name="lastName" [(ngModel)]="this.user.lastName" #lastName="ngModel" 
+                    required/>
+                  <div *ngIf="f.submitted && lastName.invalid">
+                    <div *ngIf="lastName.errors!.required">Last Name is required!</div>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                    <button tpe="submit" class="btn primary-button">Update</button>
+                    <div *ngIf="f.submitted && this.updateFailed" class="alert alert-warning">
+                        Update Failed: {{this.error}}
+                    </div>
+                </div>
+            </form>
+        </mat-expansion-panel>
+      </div>
+    </div>
+</div>
+
+<ng-template #loggedOut>
+    <meta http-equiv="refresh" content="0; URL=http://localhost:4200/auth/login" />
+  </ng-template>

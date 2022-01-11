@@ -1,0 +1,48 @@
+<div *ngIf="info.token; else loggedOut">
+    <div class="container-fluid page">
+        <div *ngIf="this.error; else applicationForm">
+            <div class="d-flex aquire page__box p-4"></div>
+            <div class="page__content">
+                <div class="body">{{this.error}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loggedOut>
+    <meta http-equiv="refresh" content="0; URL=http://localhost:4200/auth/login" />
+</ng-template>
+
+<ng-template #applicationForm>
+    <div class="d-flex aquire page__box p-4">{{this.application_information_object.title}} application</div>
+    <div class="page__content shadow p-4 position-relative">
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="aquire">
+                Job Details
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="element-description">
+                <div class="element-description-titles">Location:</div><div class="element-job-description">{{this.application_information_object.location}}</div><br>
+                <div class="element-description-titles">Description:</div><div class="element-job-description">{{this.application_information_object.description}}</div><br>
+            </div>
+            </mat-expansion-panel>
+        <br>
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="aquire">
+                Application Form
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="element-description">
+                <div class="element-description-titles">First Name:</div><div class="element-job-description">{{this.application_information_object.firstName}}</div><br>
+                <div class="element-description-titles">Last Name:</div><div class="element-job-description">{{this.application_information_object.lastName}}</div><br>
+                <div class="element-description-titles">Email:</div><div class="element-job-description">{{this.application_information_object.email}}</div><br>
+                <div class="element-description-titles">CV Document:</div><div class="element-job-description"></div>
+                <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="pdfInputChange($event)" accept=".pdf"/>
+                <button mat-flat-button color="primary" (click)="csvInput.click()">Choose CV Document (.pdf)</button><br><br>
+                <button mat-raised-button color="apply" (click)="apply(this.file)">APPLY</button>
+            </div>
+        </mat-expansion-panel>
+    </div>
+</ng-template>

@@ -4,11 +4,21 @@ import { TokenStorageService } from '../auth/token-storage.service';
 import { HomeResponse } from './home-response';
 import { Observable} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+export interface Application {
+  id: string;
+  title: string;
+  description: string;
+  applicant: string;
+  location: string;
+  date: string;
+  status: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -20,17 +30,17 @@ const httpOptions = {
       state('expanded', style({height: '*'})),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
-  ],
+  ]
 })
 export class HomeComponent implements OnInit {
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['id', 'job_name', 'date'];
-  expandedElement: PeriodicElement | null;
+  applications_data: Application[] = [];
+  columnsToDisplay = ['id', 'title', 'status', 'date'];
+  expandedElement: Application | null;
   info: any;
   jobCount: string;
   userCount: string;
   recruiterCount: string;
-  constructor(private token: TokenStorageService, private http: HttpClient) { }
+  constructor(private token: TokenStorageService, private http: HttpClient, private router: Router) { }
 
   animateValue(obj: any, start: any, end: any, duration: any) {
     let startTimestamp: any = null;
@@ -48,13 +58,15 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.info = {
       token: this.token.getToken(),
-      username: this.token.getUsername()
+      first_name: this.token.getFirstName(),
+      username: this.token.getUserName()
     };
-    this.homeData().subscribe(
+    this.homeData(this.info.username).subscribe(
       data => {
         this.jobCount = data.jobCount;
         this.userCount = data.userCount;
         this.recruiterCount = data.recruiterCount;
+        this.applications_data = data.applicationsResponseList;
       }
     );
     const job_openings = document.getElementById("jobOpenings");
@@ -65,54 +77,20 @@ export class HomeComponent implements OnInit {
     this.animateValue(recruiters_searching, 0, this.recruiterCount, 1000);
   }
 
-  homeData(): Observable<HomeResponse> {
-    return this.http.get<HomeResponse>('http://localhost:8080/func/home', httpOptions);
+  homeData(username: String): Observable<HomeResponse> {
+    return this.http.post<HomeResponse>('http://localhost:8080/func/home', {"username":username}, httpOptions);
+  }
+
+  delete(id: string) {
+    const formData: FormData = new FormData();
+    formData.append('application_id', id);
+    this.http.post<string>('http://localhost:8080/func/application/delete', formData).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
+    setTimeout(() => 
+    {
+        window.location.reload();
+    }, 500);
   }
 }
-
-export interface PeriodicElement {
-  job_name: string;
-  id: number;
-  date: string;
-  location: string;
-  description: string;
-  applicant_name: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    id: 1,
-    job_name: 'Internship Basic Software Development',
-    date: '11/15/2021 - 5:27 PM',
-    location: 'Timisoara',
-    description: `Here is job description.
-    test`,
-    applicant_name: 'Rafael Ban',
-  },
-  {
-    id: 2,
-    job_name: 'Internship Mechanical Engineering',
-    date: '11/15/2021 - 5:27 PM',
-    location: 'Timisoara',
-    description: `Job description
-test
-another test`,
-    applicant_name: 'Rafael Ban',
-  },
-  {
-    id: 3,
-    job_name: 'Internship for HW',
-    date: '11/15/2021 - 5:27 PM',
-    location: 'Timisoara',
-    description: `job description`,
-    applicant_name: 'Rafael Ban',
-  },
-  {
-    id: 4,
-    job_name: 'Internship as Software Developer for Powertrain Control',
-    date: '11/15/2021 - 5:27 PM',
-    location: 'Timisoara',
-    description: `another job description`,
-    applicant_name: 'Rafael Ban',
-  },
-];

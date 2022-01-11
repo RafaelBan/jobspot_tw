@@ -1,29 +1,46 @@
 .page {
-  padding: 1rem;
-  background: white;
-  &__box {
-    min-height: 120px;
+    padding: 1rem;
     background: white;
-    margin: 0 -1rem;
-    font-size: 36px;
-  }
-  &__content {
-    min-height: calc(100vh - 178px);
-    border-radius: 10px;
-    margin-top: -3rem;
-    background: white;
-    color: black;
-    font-size: 2rem;
-    &-data {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    &__box {
+      min-height: 120px;
+      background: white;
+      margin: 0 -1rem;
+      font-size: 36px;
+    }
+    &__content {
+      min-height: calc(100vh - 178px);
+      border-radius: 10px;
+      margin-top: -3rem;
+      background: white;
+      color: black;
+      font-size: 2rem;
+      &-data {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
-}
-
-.aquire {
+  
+  .aquire {
     font-family: 'aquire', 'arial', sans-serif;
+  }
+  
+  .primary {
+    color: #f0ba27;
+  }
+  
+  .secundary {
+    color: rgb(194, 194, 194);
+  }
+  
+  .welcome {
+    font-size: 20px;
+  }
+  
+  .prenume {
+    font-size: 30px;
+    color: #f0ba27;
   }
   
   .table-title {
@@ -100,7 +117,7 @@
     white-space: pre-wrap;
   }
   
-  .mat-apply {
-    background-color: rgb(2, 173, 2);
+  .primary-button {
+    background-color: rgb(33, 120, 190);
     color: #fff;
-}
+  }

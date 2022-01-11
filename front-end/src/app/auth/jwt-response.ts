@@ -1,5 +1,6 @@
 export class JwtResponse {
     token: string;
-    type: string;
+    firstName: string;
     username: string;
+    role: string;
 }

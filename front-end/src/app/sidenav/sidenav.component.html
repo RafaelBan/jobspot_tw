@@ -9,4 +9,9 @@
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/jobs">
       <mat-icon>work</mat-icon> <div class ="aquire">Jobs</div>
     </a>
+    <div *ngIf="this.token.getRole() == '2'">
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon> <div class ="aquire">Recruiter Dashboard</div>
+      </a>
+    </div>
 </mat-nav-list>

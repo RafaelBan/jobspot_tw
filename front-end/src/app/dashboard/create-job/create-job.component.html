@@ -1,0 +1,81 @@
+<div *ngIf="info.token; else loggedOut">
+    <div *ngIf="info.role == '2'; else noAccess">
+        <div class="container-fluid page">
+            <div *ngIf="this.error; else applicationForm">
+                <div class="d-flex aquire page__box p-4"></div>
+                <div class="page__content">
+                    <div class="body">{{this.error}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loggedOut>
+    <meta http-equiv="refresh" content="0; URL=http://localhost:4200/auth/login" />
+</ng-template>
+
+<ng-template #applicationForm>
+    <div class="d-flex aquire page__box p-4">Create Job</div>
+    <div class="page__content shadow p-4 position-relative">
+        <mat-expansion-panel [expanded]='true' hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="aquire">
+                Job Details
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="form-group mt-2 arial">
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control arial" name="title" [(ngModel)]="form.title" #title="ngModel"
+                    required />
+                  <div *ngIf="f.submitted && title.invalid">
+                    <div *ngIf="title.errors!.required">Title is required!</div>
+                  </div>
+                </div>
+                <div class="form-group mt-2 arial">
+                  <label for="description">Description</label>
+                  <textarea type="text" cols="40" rows="5" class="form-control arial" name="description" [(ngModel)]="form.description" #description="ngModel" 
+                    required></textarea>
+                  <div *ngIf="f.submitted && description.invalid">
+                    <div *ngIf="description.errors!.required">Description is required!</div>
+                  </div>
+                </div>
+                <div class="form-group mt-2 arial">
+                  <label for="tags">Tags</label>
+                  <input type="text" class="form-control arial" name="tags" [(ngModel)]="form.tags" #tags="ngModel"
+                    required />
+                  <div *ngIf="f.submitted && tags.invalid">
+                    <div *ngIf="tags.errors!.required">Tags is required!</div>
+                  </div>
+                </div>
+                <div class="form-group mt-2 arial">
+                  <label for="location">Location</label>
+                  <input type="text" class="form-control arial" name="location" [(ngModel)]="form.location" #location="ngModel" 
+                    required location />
+                  <div *ngIf="f.submitted && location.invalid">
+                    <div *ngIf="location.errors!.required">Location is required!</div>
+                  </div>
+                </div>
+                <div class="form-group mt-2 arial">
+                  <label for="status">Status</label>
+                  <input type="status" class="form-control arial" name="status" [(ngModel)]="form.status" #status="ngModel"
+                    required/>
+                  <div *ngIf="f.submitted && status.invalid">
+                    <div *ngIf="status.errors!.required">Status is required!</div>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                    <button tpe="submit" class="btn primary-button">Create</button>
+                    <div *ngIf="f.submitted && this.creationFailed" class="alert alert-warning">
+                        Creation Failed: {{this.error}}
+                    </div>
+                </div>
+            </form>
+        </mat-expansion-panel>
+    </div>
+</ng-template>
+
+<ng-template #noAccess>
+    <meta http-equiv="refresh" content="0; URL=http://localhost:4200/home" />
+</ng-template>

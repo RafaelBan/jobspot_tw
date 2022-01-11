@@ -16,13 +16,21 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { JobsComponent } from './jobs/jobs.component';
+import { ApplyComponent } from './jobs/apply/apply.component';
 
 import { httpInterceptorProviders } from './auth/auth-interceptor';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardJobComponent } from './dashboard/dashboard-job/dashboard-job.component';
+import { CreateJobComponent } from './dashboard/create-job/create-job.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +40,12 @@ import { httpInterceptorProviders } from './auth/auth-interceptor';
     RegisterComponent,
     HomeComponent,
     JobsComponent,
+    ApplyComponent,
     SidenavComponent,
+    DashboardComponent,
+    DashboardJobComponent,
+    CreateJobComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +55,11 @@ import { httpInterceptorProviders } from './auth/auth-interceptor';
     MatSidenavModule,
     MatToolbarModule,
     MatMenuModule,
+    MatExpansionModule,
+    MatFormFieldModule,
     MatIconModule,
     MatDividerModule,
+    MatButtonModule,
     MatListModule,
     MatCardModule,
     MatTableModule,
